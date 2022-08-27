@@ -102,10 +102,46 @@
         background-color: rgba(22, 24, 35, 0.06);
     }
 }
+.actions {
+    display: flex;
+    align-items: center;
+}
+.action-btn {
+    background-color: transparent;
+    font-size: 2.4rem;
+    padding: 4px 16px;
+    cursor: pointer;
+    color: #161823;
+    position: relative;
+    top: 2px;
+}
+.badge {
+    position: absolute;
+    top: -3px;
+    right: 4px;
+    padding: 0px 6px;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white);
+    font-family: var(--font);
+    background-color: var(--primary);
+}
+
 .more-icon {
     font-size: 2rem;
     margin-left: 28px;
     background-color: transparent;
     padding: 4px 8px;
+    cursor: pointer;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 12px;
     cursor: pointer;
 }
