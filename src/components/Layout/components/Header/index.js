@@ -1,14 +1,46 @@
 import classNames from 'classnames/bind';
-import styles from './Header.module.scss'
+import styles from './Header.module.scss';
 import { images } from '~/assets/images';
+import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner, faMagnifyingGlass, faSignIn, faEllipsisVertical, faEarthAsia, faQuestionCircle, faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import { useEffect, useState } from 'react';
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import AcountItem from '~/components/AccountItem';
+import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles)
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                    type: 'language'
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng việt',
+                    type: 'language'
+                },
+            ]
+        }
+    },
+    {
+        icon: <FontAwesomeIcon icon={faQuestionCircle} />,
+        title: 'Feedback and Help',
+        to: '/feebback'
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keybroad shortcuts',
+    },
+]
 function Header() {
     const [searchResult, setSearchResult] = useState([])
     useEffect(() => {
@@ -17,6 +49,15 @@ function Header() {
             setSearchResult([])
         }, 0)
     }, [])
+    const handleMenuChange = (menuItem) => {
+        console.log(menuItem);
+        switch (menuItem.type) {
+            case 'language':
+                //  Handle change language
+                break
+            default:
+        }
+    }
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -50,7 +91,16 @@ function Header() {
                     </div>
                 </Tippy>
                 <div className={cx('action')}>
-
+                    <Button text>Upload</Button>
+                    <Button leftIcon={<FontAwesomeIcon icon={faSignIn} />} primary>Log in</Button>
+                    <Menu
+                        items={MENU_ITEMS}
+                        onChange={handleMenuChange}
+                    >
+                        <button className={cx('more-icon')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header >
