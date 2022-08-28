@@ -15,26 +15,26 @@ const cx = classNames.bind(styles)
 function Search() {
     const [searchValue, setSearchValue] = useState('')
     const [searchResult, setSearchResult] = useState([])
-    const [showResult, setShowResult] = useState(true)
+    const [showResult, setShowResult] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const inputRef = useRef()
-    const debounded = useDebound(searchValue, 500)
+    const deboundedValue = useDebound(searchValue, 500)
     useEffect(() => {
-        if (!debounded.trim()) {
+        if (!deboundedValue.trim()) {
             setSearchResult([])
             return
         }
         setLoading(true)
         const fetch = async () => {
             setLoading(true)
-            const result = await searchService.search(debounded)
+            const result = await searchService.search(deboundedValue)
             setSearchResult(result)
             setLoading(false)
         }
         fetch()
 
-    }, [debounded])
+    }, [deboundedValue])
     const handleHideResult = () => {
         setShowResult(false)
     }

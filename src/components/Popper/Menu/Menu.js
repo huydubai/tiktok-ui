@@ -28,26 +28,28 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
             }} />
         })
     }
+    const renderResult = (attrs) => (
+        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-poper')}>
+                {history.length > 1 && <Header title={current.title} onBack={() => {
+                    setHistory(prev => prev.slice(0, prev.length - 1))
+                }} />}
+                <div className={cx(('menu-body'))}>{renderItem()}</div>
+            </PopperWrapper>
+        </div>
+    )
+    // Reset to first
+    const handleBack = () => setHistory(prev => prev.slice(0, 1))
     return (
         <Tippy
-
             interactive
-            // visible
-            delay={[0, 800]}
-            placement='bottom-end'
-            offset={[12, 8]}
-            hideOnClick={hideOnClick}
-            render={(attrs) => (
-                <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={cx('menu-poper')}>
-                        {history.length > 1 && <Header title={current.title} onBack={() => {
-                            setHistory(prev => prev.slice(0, prev.length - 1))
-                        }} />}
-                        <div className={cx(('menu-body'))}>{renderItem()}</div>
-                    </PopperWrapper>
-                </div>
-            )}
-            onHide={() => setHistory(prev => prev.slice(0, 1))}
+            // visible // để ẩn hiện
+            delay={[0, 800]} // delay bật tắt
+            placement='bottom-end' // vị trí nằm
+            offset={[12, 8]} // khoảng cách
+            hideOnClick={hideOnClick} // set về false
+            render={renderResult}
+            onHide={handleBack}
         >
             {children}
         </Tippy>
