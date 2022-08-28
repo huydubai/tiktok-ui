@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 }
 .container {
     width: var(--default-layout-width);
+    max-width: 100%;
     display: flex;
     margin-top: var(--default-layout-header-height);
+    padding: 0 var(--default-layout-horizontal-space);
 }
 .content {
     flex: 1;
